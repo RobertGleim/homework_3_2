@@ -1,14 +1,11 @@
-class Node:
-    def __init__(self, task):
-        self.task = task
-        self.next = None
-
-
 
 class Task:
     def __init__ (self, name):
         self.name = name
         self.completed = "Incomplete"
+    def mark_completed(self):
+        self.completed = "Completed"
+        return f"{self.completed} {self.name} is now marked as completed."    
 
 
         
@@ -66,10 +63,12 @@ class TaskList:
     def get_at_potion(self, position):
         current = self.head
         count = 0
-        while current <position:
+        while current and count <position:
+            if count == position:
+                return current.task 
             count += 1
             current = current.next
-        return current.task
+        return None
     
     def delete_at_position(self, position):
         current = self.head
@@ -81,16 +80,16 @@ class TaskList:
             current.next = current.next.next
             return removing
     
-    # Instantiate TaskList and print welcome message outside the class definition
-tasks = TaskList()
+    
+task = TaskList()
 print("========= Task List ========= ")
     
-tasks.append(Task("wake up early"))
-tasks.append(Task("Eat a Good Breakfest"))
-tasks.append(Task("Do some Codewars"))
-tasks.append(Task("Eat Lunch"))    
-tasks.append(Task("write homeworkcode"))
-tasks.append(Task("Complete Python assignment"))
-tasks.append(Task("Attend Full Stack Class"))
+task.append(Task("wake up early"))
+task.append(Task("Eat a Good Breakfest"))
+task.append(Task("Do some Codewars"))
+task.append(Task("Eat Lunch"))    
+task.append(Task("write homeworkcode"))
+task.append(Task("Complete Python assignment"))
+task.append(Task("Attend Full Stack Class"))
 
-
+print(task.tasklistitems())
